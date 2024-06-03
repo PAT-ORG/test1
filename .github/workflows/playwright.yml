@@ -36,3 +36,18 @@ jobs:
         name: test
         url: ${{ secrets.TEST_GOOGLE_CHAT_WEBHOOK_URL }}
         status: ${{ steps.tests.outcome }}
+
+
+    - uses: actions/checkout@master
+    - run: mkdir -p ${{ github.workspace }}/tmp/artifacts
+    - name: Lighthouse
+      uses: foo-software/lighthouse-check-action@master
+      with:
+        outputDirectory: ${{ github.workspace }}/tmp/artifacts
+        gitHubAccessToken: ${{ secrets.POST_DEPLOY_TARGET_GITHUB_APP_TOKEN }}
+        urls: 'https://yral.com/'
+    - name: Upload artifacts
+      uses: actions/upload-artifact@master
+      with:
+        name: Lighthouse reports
+        path: ${{ github.workspace }}/tmp/artifacts
