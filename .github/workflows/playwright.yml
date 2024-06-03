@@ -34,4 +34,4 @@ jobs:
       with:
         name: test
         url: ${{ secrets.TEST_GOOGLE_CHAT_WEBHOOK_URL }}
-        status: ${{ steps.tests.outcome }}
+        status: ( "Hi! Your test failed." )
